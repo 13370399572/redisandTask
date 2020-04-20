@@ -1,0 +1,37 @@
+server:
+  port: 8200
+spring:
+  application:
+    name: tfs
+  datasource:
+    #url: jdbc:mysql://192.168.7.35:30000/TFSCPH?serverTimezone=GMT%2B8&characterEncoding=utf-8&rewriteBatchedStatements=true
+    #username: tfs
+    #password: tfs1234%
+    url: jdbc:mysql://114.116.241.29:36000/banji?serverTimezone=GMT%2B8&characterEncoding=utf-8&rewriteBatchedStatements=true
+    username: root
+    password: root
+    hikari:
+      minimum-idle: 1
+      idle-timeout: 60000
+      maximum-pool-size: 5
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    properties.hibernate.format_sql: true
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+
+mybatis:
+  mapper-locations: classpath:mappers/*Mapper.xml
+  config-location: classpath:mappers/config/mybatis-config.xml

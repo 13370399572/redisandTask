@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>HTML5/CSS3简易联系表单DEMO演示</title>
+
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+
+</head>
+
+<body>
+
+	<div class="container">
+		<!-- <form id="contact" action="" method="post"> -->
+		<form id="contact">
+			<h3>学生报名</h3>
+			<h4>填写下列信息</h4>
+			<fieldset>
+				<input placeholder="学生姓名" name="name" type="text" tabindex="1"
+					required autofocus>
+			</fieldset>
+			<fieldset>
+				<input placeholder="班级" name="banji" type="text" tabindex="2"
+					required>
+			</fieldset>
+			<fieldset>
+				<input placeholder="家长姓名" name="jiazhang" type="text" tabindex="3"
+					required>
+			</fieldset>
+			<fieldset>
+				<input placeholder="家长电话" name="phone" type="text" tabindex="4"
+					required>
+			</fieldset>
+			<fieldset>
+				<textarea placeholder="备注" name="remark" tabindex="5" required></textarea>
+			</fieldset>
+			<fieldset>
+				<div type="submit" style="text-align:center" id="contact-submit">点击提交</div>
+			</fieldset>
+		</form>
+
+	</div>
+	<div style="text-align: center; clear: both">
+		<script type="text/javascript">
+			$(function() {
+				
+			})
+			$("#contact-submit").click(function(){
+					debugger;
+				   var banji = JSON.stringify($("#contact").serializeObject()); 
+				  /*  var banji =	$("#contact").serializeObject() */
+					debugger;
+					$.ajax({
+						type:"POST",
+						url : "http://localhost:8888/banji/save",
+						contentType: "application/json",
+						data : banji,
+						success : function(data) {
+							alert("添加成功")
+						}
+					})
+				})
+				$.fn.serializeObject = function() {
+		var o = {};
+		var a = this.serializeArray();
+		$.each(a, function() {
+			if (o[this.name]) {
+				if (!o[this.name].push) {
+					o[this.name] = [ o[this.name] ];
+				}
+				o[this.name].push(this.value || '');
+			} else {
+				o[this.name] = this.value || '';
+			}
+		});
+		return o;
+	};
+
+		</script>
+	</div>
+</body>
+</html>
