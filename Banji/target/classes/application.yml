@@ -1,6 +1,11 @@
 server:
   port: 8200
 spring:
+  data:
+    mongodb:
+      database: admin
+      authentication-database: admin
+      uri: mongodb://admin:123456@114.116.241.29:27017
   application:
     name: tfs
   datasource:
@@ -35,3 +40,8 @@ spring:
 mybatis:
   mapper-locations: classpath:mappers/*Mapper.xml
   config-location: classpath:mappers/config/mybatis-config.xml
+
+
+  
+  
+  

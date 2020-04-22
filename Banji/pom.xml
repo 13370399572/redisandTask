@@ -18,11 +18,13 @@
 	</properties>
 
 	<dependencies>
-		<!-- <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>打成war的时候打开注释，本地开发用内嵌tomcat时加上注释
-		</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-tomcat</artifactId> 
+			<scope>provided</scope>打成war的时候打开注释，本地开发用内嵌tomcat时加上注释 </dependency> -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>core</artifactId>
@@ -109,6 +111,20 @@
 			<artifactId>shiro-spring</artifactId>
 			<version>1.4.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+		</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-mongodb</artifactId>
+			</dependency>
+			
+			<dependency>
+	    <groupId>com.janeluo</groupId>
+	    <artifactId>ikanalyzer</artifactId>
+	    <version>2012_u6</version>
+	</dependency>
 	</dependencies>
 
 	<build>

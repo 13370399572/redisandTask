@@ -16,7 +16,7 @@ public class Zxing {
 	        Zxing zxing = new Zxing();
 	 
 	        // 传参：二维码内容和生成路径
-	        if (zxing.orCode("http://114.116.241.29:8200/index/get", "D:\\1.jpg")) {
+	        if (zxing.orCode("http://vavjnk.natappfree.cc/index/get", "D:\\1.jpg")) {
 	            System.out.println("ok,成功");
 	        } else {
 	            System.out.println("no,失败");

@@ -65,14 +65,14 @@ public class BanjiServiceImpl implements BanjiService {
 			public Predicate toPredicate(Root<Banji> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 				// TODO Auto-generated method stub
 				 List<Predicate> list = new ArrayList<Predicate>();
-				 if(StringUtils.isNotBlank(name)){
+				 if(StringUtils.isNotBlank(name)||name==""){
 					list.add(criteriaBuilder.like(root.get("name"), "%"+name+"%"));
 					}if (StringUtils.isEmpty(name)) {
 					list.add(criteriaBuilder.notLike(root.get("name"), "%"+name+"%"));
 					}
 				 return criteriaBuilder.or(list.toArray(new Predicate[list.size()]));
 			}
-	    	
+			
 		});
 		
 	}

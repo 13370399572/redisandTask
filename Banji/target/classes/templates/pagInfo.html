@@ -42,8 +42,8 @@
 
             <div class="row">
             <div class="form-inline" style="padding: 0px 0px 0px 150px">
-                <input type="text"  class="input-sm" placeholder="学生姓名" />
-                <button class="btn btn-primary">搜 索</button>
+                <input type="text" name="name" id="name"  class="input-sm" placeholder="学生姓名" />
+                <button onclick="query()"  class="btn btn-primary">搜 索</button>
             </div>
  </div>
 	<table id="example2" class="table table-bordered table-hover">
@@ -72,7 +72,12 @@
     $(function () {
     	tables()
     });
-       
+      
+        function query(){
+        	$("#example2").dataTable().fnDestroy();
+        	tables()
+        }
+    
         function deleteThisRowPapser(id){
         	url="/banji/delete/"+id
         	$.post(url,function(data){
@@ -144,10 +149,14 @@
                  }],
                  ajax: function (data, callback, settings) {
                      //封装请求参数
+                     var name = $("#name").val();
+                     
                      var param = {};
                      param.pageSize = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
                      param.start = data.start;//开始的记录序号
                      param.currentPage = (data.start / data.length) + 1;//当前页码
+                     param.name=name
+                    debugger;
                      //console.log(param);
                      //ajax请求数据
                      $.ajax({

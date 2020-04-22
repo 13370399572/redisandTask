@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.test.entity.PageQueryBean;
-
+import com.test.dao.BanjiMongodbDao;
 import com.test.entity.Banji;
 import com.test.service.BanjiService;
 
@@ -23,12 +23,15 @@ public class BanjiController {
 	@Autowired
 	private BanjiService banjiService;
 
+	@Autowired
+	private BanjiMongodbDao banjiMongodbDao;
+
 	@PostMapping("/save")
 	public String save(@RequestBody Banji banji) {
 		banjiService.save(banji);
 		return "添加成功";
 	}
-    
+
 	@PostMapping("/update")
 	public String update(@RequestBody Banji banji) {
 		banjiService.update(banji);
@@ -53,5 +56,14 @@ public class BanjiController {
 	@PostMapping("/select/{id}")
 	public Banji select(@PathVariable Long  id) {
 		return	banjiService.findByIdBanji(id);
+	}
+    
+	@PostMapping("/svaetest")
+	public void saveBanji() {
+		Banji banji=new Banji();
+		banji.setId(2l);
+		banji.setName("小明");
+		banji.setJiazhang("fffooo123");
+		banjiMongodbDao.saveBanji(banji);
 	}
 }
