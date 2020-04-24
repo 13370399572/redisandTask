@@ -1,9 +1,12 @@
 package com.ypc.solrdemo.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
 
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -19,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.ypc.solrdemo.dao.UserDao;
 import com.ypc.solrdemo.entity.User;
 
@@ -55,6 +57,7 @@ public class UserServiceImpl implements UserService {
 	
 	public User queryById(int id) {
         User user = null;
+		/* Map<String,Object> map= null; */
         try {
             SolrDocument solrDocument = solrClient.getById(String.valueOf(id));
             Gson gson = new Gson();
@@ -64,8 +67,16 @@ public class UserServiceImpl implements UserService {
 			 * gson.fromJson(solrString,User.class);
 			 */
             // ·½·¨2
-            Map<String,Object> map = solrDocument.getFieldValueMap();
-            user = gson.fromJson(map.toString(),User.class);
+            if (Objects.nonNull(solrDocument)) {
+				/*
+				 * map = solrDocument.getFieldValueMap(); user =
+				 * gson.fromJson(map.toString(),User.class);
+				 */
+            	String solrString = gson.toJson(solrDocument); 
+                String xxString=	solrString.replaceAll("\\[", "").replaceAll("\\]", "");
+            	user = gson.fromJson(xxString,User.class);
+			}
+            
             
             if (null == user) {
                 user = userMapper.queryById(id);
@@ -81,7 +92,7 @@ public class UserServiceImpl implements UserService {
     }
 	
     public List<User> queryAll() {
-        List<User> list = null;
+        List<User> list = new ArrayList<User>();
         SolrQuery query = new SolrQuery();
         query.setQuery("*:*");
         query.setStart(0);
@@ -89,11 +100,15 @@ public class UserServiceImpl implements UserService {
         try {
             QueryResponse response = solrClient.query(query);
             SolrDocumentList documentList = response.getResults();
-            if (!documentList.isEmpty()) {
-                Gson gson = new Gson();
-                String listString = gson.toJson(documentList);
-                list = gson.fromJson(listString, new TypeToken<List<User>>() {}.getType());
+            if (Objects.nonNull(documentList)) {
 //              list = convertToModel(documentList);
+                for (SolrDocument entry : documentList) {
+                	Gson gson = new Gson();
+                	 String listString = gson.toJson(entry);
+                	 String xxString=	listString.replaceAll("\\[", "").replaceAll("\\]", "");
+                	 User user =  gson.fromJson(xxString, User.class);
+                	 list.add(user);
+				}
                 LOGGER.info(">>>> query user from solr success <<<<");
             } else {
                 list = userMapper.queryAll();

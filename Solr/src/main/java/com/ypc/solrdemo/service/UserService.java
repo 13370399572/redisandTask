@@ -3,11 +3,12 @@ package com.ypc.solrdemo.service;
 import java.util.List;
 import java.util.Map;
 
+
 import com.ypc.solrdemo.entity.User;
 
 public interface UserService {
 
-	User queryById(int id);
+	User queryById( int id);
 	
 	List<User> queryAll ();
 

@@ -2,6 +2,7 @@ package com.ypc.solrdemo.entity;
 
 import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
 
@@ -26,7 +27,18 @@ public class User {
     @Field
     private String period;
     
-    // ·½·¨Ê¡ÂÔ
+    @Transient
+    private Long _version_;
+    
+    
+    
+    public Long get_version_() {
+		return _version_;
+	}
+	public void set_version_(Long _version_) {
+		this._version_ = _version_;
+	}
+	// ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½
 	public int getId() {
 		return id;
 	}

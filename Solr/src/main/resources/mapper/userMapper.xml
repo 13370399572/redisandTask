@@ -2,7 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ypc.solrdemo.dao.UserDao">
 	<select id="queryById" resultType="com.ypc.solrdemo.entity.User">
-		       SELECT * FROM t_user WHERE id= #{id}
+		SELECT
+		*
+		FROM t_user a
+		WHERE a.id = #{id}<!--主键 -->
 	</select>
 
 	<select id="queryAll" resultType="com.ypc.solrdemo.entity.User">
@@ -11,11 +14,13 @@
 	<insert id="insertUser"
 		parameterType="com.ypc.solrdemo.entity.User" useGeneratedKeys="true"
 		keyProperty="id">
-		insert into t_user (username,age,mobile,address,sex,description)
-		values (#{userName},#{age},#{mobile},#{address},#{sex},#{description})
+		insert into t_user
+		(username,age,mobile,address,sex,description)
+		values
+		(#{userName},#{age},#{mobile},#{address},#{sex},#{description})
 	</insert>
-	
+
 	<delete id="deleteById">
-	delete from t_user where id=#{id} 
+		delete from t_user where id=#{id}
 	</delete>
 </mapper>
