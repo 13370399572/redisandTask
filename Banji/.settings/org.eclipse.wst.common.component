@@ -4,6 +4,12 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <dependent-module archiveName="webmagic-core-0.7.3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/webmagic-core/webmagic-core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="webmagic-extension-0.7.3.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/webmagic-extension/webmagic-extension">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/Banji/target/classes"/>
         <property name="context-root" value="Banji"/>
     </wb-module>
